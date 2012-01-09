@@ -1,0 +1,92 @@
+<script type="text/javascript">
+    $(document).ready(function($){
+
+        $("#imprimir").click(function(){
+            document.pdfHoraExtra.action = "view/relatorio/horaExtra/listaPdf.php";
+            document.pdfHoraExtra.method = "post";
+            document.pdfHoraExtra.target = "_blank";
+            document.pdfHoraExtra.submit();
+        });
+
+    });
+
+</script>
+<div class=" header-content">
+    <h2 class="left">Relatório de Hora-Extra</h2>
+    <?php
+    require_once VIEW . DS . "default" . DS . "sede.php";
+    ?>
+</div>
+
+<div id="dashboard-wrap">
+    <div class="metabox"></div>
+    <div class="clear"> </div>
+    <div class="box-content">
+        <div class="box">
+            <?php
+            //Recebendo os Dados
+            $dataInicio = formataData($_POST['dataInicio']);
+            $dataFim = formataData($_POST['dataFim']);
+            $sede = $_SESSION['sede'];
+            /**
+             * Persistindo em listar os perfis
+             */
+            try {
+                $horaExtra = Relatorio::relatorioHoraExtra($dataInicio, $dataFim, $sede);
+            ?>
+            <div class="radius">
+                <form name="pdfHoraExtra" id="pdfHoraExtra" method="post">
+                    <input id="imprimir" type="button" class="button left" value=" Imprimir " title="imprimir" name="imprimir" />
+                    <input type="hidden" name="dataInicio" id="dataInicio" value="<?php echo $dataInicio; ?>" />
+                    <input type="hidden" name="dataFim" id="dataFim" value="<?php echo $dataFim; ?>" />
+                    <input type="hidden" name="sede" id="sede" value="<?php echo $sede; ?>" />
+                    <br /><br /><br />
+                    <table border="0" cellpadding="0" cellspacing="0" width="745">
+                        <thead>
+                            <tr class="tr-header">
+                                <th>Data</th>
+                                <th>Nome</th>
+                                <th>Quantidade Horas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach($horaExtra as $hora){
+                                if($count % 2 ==	 0){
+                                    $class = "bgcolor='#e6eaec'";
+                                } else {
+                                    $class = "";
+                                }
+                                $count++;
+                            ?>
+                                <tr <?php echo $class; ?> >
+                                    <td width="15%" align="left">
+                                        <?php echo formataData($hora->getData());?>
+                                    </td>
+                                    <td width="50%">
+                                        <?php echo $hora->getColaborador()->getNome(); ?>
+                                    </td>
+                                    <td width="20%" align="center">
+                                        <?php echo $hora->getPendentes() + $hora->getPagas() . " hs"; ?>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <?php
+                } catch(ListaVazia $e){
+            ?>
+            <div class="exception">
+                <?php echo $e->getMessage();?>
+            </div>
+            <?php
+                }
+            ?>
+        </div>
+    </div>
+</div>
