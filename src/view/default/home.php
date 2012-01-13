@@ -14,28 +14,27 @@
 <script type="text/javascript">
 $(document).ready(function($){
 
-	$("#dadosPendentes").change(function(){
-		
-		id =  parseInt($("#dadosPendentes").val());		
-		if(id != 0){
-			window.location.href = "recursosHumanos/ver/"+id;
-		}
-		 
-	});          
-	
-	$("#documentosPendentes").change(function(){
-		id =  parseInt($("#documentosPendentes").val());		
-		if(id != 0){
-			window.location.href = "recursosHumanos/ver/"+id;
-		} 
-	});
-	
-	$("#renovacoesPendentes").change(function(){
-		id =  parseInt($("#renovacoesPendentes").val());		
-		if(id != 0){
-			window.location.href = "recursosHumanos/ver/"+id;
-		} 
-	});
+$("#dadosPendentes").change(function(){
+    id =  parseInt($("#dadosPendentes").val());		
+    if(id != 0){
+            window.location.href = "recursosHumanos/ver/"+id;
+    }
+});          
+
+$("#documentosPendentes").change(function(){
+    id =  parseInt($("#documentosPendentes").val());		
+    if(id != 0){
+            window.location.href = "recursosHumanos/ver/"+id;
+    }
+});
+
+$("#renovacoesPendentes").change(function(){
+    id =  parseInt($("#renovacoesPendentes").val());		
+    if(id != 0){
+            window.location.href = "recursosHumanos/ver/"+id;
+    } 
+});
+        
 });
 </script>
 		

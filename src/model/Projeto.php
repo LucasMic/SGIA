@@ -22,8 +22,8 @@ class Projeto {
     private $metodologia;
     private $descricaoAreasPesquisa;
     private $consideracoesGeraisRecomendacoes;
-    private $usuario_id;
-    private $usuario_perfil_id;
+    private $usuario;
+    
     
     /*
     * Metodo construtor()
@@ -193,11 +193,13 @@ class Projeto {
         // executando o metodo //
         $projeto = $instancia->buscar($id);
         // checando se o resultado foi falso //
-        if(!$projeto)
+        if(!$projeto){
                 // levanto a excessao RegistroNaoEncontrado //
                 throw new RegistroNaoEncontrado(RegistroNaoEncontrado::PROJETOS);
+        }
+        $usuario = Usuario::buscar($projeto['usuario_id']);
         // instanciando e retornando o Usuario //
-        return new Projeto($projeto['id'],$projeto['nome'],$projeto['descricao'], $projeto['introducao'], $projeto['metodologia'], $projeto['descricao_areas_pesquisa'], $projeto['consideracoes_gerais_recomendacoes'], $projeto['usuario_id'], $projeto['usuario_perfil_id']);
+        return new Projeto($projeto['id'],$projeto['nome'],$projeto['descricao'], $projeto['introducao'], $projeto['metodologia'], $projeto['descricao_areas_pesquisa'], $projeto['consideracoes_gerais_recomendacoes'], $usuario);
     }
     
 }

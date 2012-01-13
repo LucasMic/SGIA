@@ -1,12 +1,8 @@
 <style type="text/css">
-
 .labelButao{
     color: #CC3300;
-    cursor: pointer;
-    /*display: block;*/
+    cursor: pointer;    
 }
-
-
 </style>
 
 <script type="text/javascript">
@@ -87,6 +83,18 @@ $(document).ready(function(){
     });
     ///isso é para DescricaoAreaPesquisa//
     
+    //validação
+    $("#cadastrar").click(function(){ 
+        if($("#nome").val() ==""){
+            alert("é necessário o nome do projeto");
+            $("#nome").focus();
+        } else {
+            $("#formProjeto").submit();
+            return true;
+        }        
+    });
+    
+    
     
 });
 </script>
@@ -108,7 +116,7 @@ $(document).ready(function(){
                     <div class="box">
                             <div class="table">
                                     <div class="inside">
-                                            <form method="post">
+                                            <form method="post" id="formProjeto">
                                                     <fieldset>
                                                         <legend>Dados</legend>
                                                         <ul class="list-cadastro">
@@ -202,7 +210,7 @@ $(document).ready(function(){
 
                                                     <ul id="bts">
                                                         <li>
-                                                            <input type="submit" class="button right" value=" Cadastrar " />
+                                                            <input type="button" id="cadastrar" class="button right" value=" Cadastrar " />
                                                             <input type="button" style="margin-right:5px;" class="button right" value="Voltar" onclick="location.href='voltar'" />
                                                         </li>
                                                     </ul>

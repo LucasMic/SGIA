@@ -48,12 +48,12 @@
 								<td width="78%" align="left"><?php echo $perfil->getNome();?></td>
 								<td width="20%">
 									<ul class="action">						
-										<li><a href="perfil/ver/<?php echo $perfil->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
+										<li><a title="ver" href="perfil/ver/<?php echo $perfil->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
 										<?php 
 											if(Acao::checarPermissao(2,PerfilControll::MODULO)){
 										?>
-										<li><a href="perfil/editar/<?php echo $perfil->getId();?>"><img src="img/btn-editar.png" width="20px" height="20px"/></a></li>
-										<li><a href="perfil/excluir/<?php echo $perfil->getId();?>"><img src="img/btn-excluir.png" /></a></li>
+										<li><a title="editar" href="perfil/editar/<?php echo $perfil->getId();?>"><img src="img/btn-editar.png" width="20px" height="20px"/></a></li>
+										<li><a title="excluir" href="perfil/excluir/<?php echo $perfil->getId();?>"><img src="img/btn-excluir.png" /></a></li>
 										<?php 
 											}
 										?>

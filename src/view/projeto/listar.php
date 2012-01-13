@@ -7,7 +7,7 @@
 	</div>
 	<hr class="mrg-bottom_20"/>
 	 <div class="mrg-bottom_20">
-    	<a class="btn_1" href="projeto/add">cadastrar projeto</a>
+    	<a title="Cadastrar" class="btn_1" href="projeto/add">cadastrar projeto</a>
     </div>
 	<div id="dashboard-wrap">
 		<div class="metabox"></div>
@@ -26,8 +26,7 @@
 					<table id="lista" border="0" cellpadding="0" cellspacing="0" width="745">
 						<thead>
 							<tr class="tr-header">
-								<th>Nome</th>
-								<th>Descrição</th>
+								<th>Nome do projeto</th>								
                                                                 <th>Usuário</th>
 								<th>Ações</th>
 							</tr>
@@ -44,16 +43,16 @@
 								$count++;
 						?>
 							<tr <?php echo $class; ?> >
-                                                            <td width="20%" align="left"><?php echo $projeto->getNome();?></td>
-                                                            <td width="40%" align="left"><?php echo $projeto->getDescricao();?></td>
+                                                            <td width="60%" align="left"><?php echo $projeto->getNome();?></td>                                                            
                                                             <td width="20%" align="left"><?php echo $projeto->getUsuario()->getLogin();?></td>
                                                             <td width="20%">
                                                                 <ul class="action">						
-                                                                    <li><a href="projeto/ver/<?php echo $projeto->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
+                                                                    <li ><a title="ver" href="projeto/ver/<?php echo $projeto->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
                                                                 <?php
                                                                     if(Acao::checarPermissao(2,ProjetoControll::MODULO)){
                                                                 ?>
-                                                                    <li><a href="projeto/excluir/<?php echo $projeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>
+                                                                    <li><a title="editar" href="projeto/editar/<?php echo $projeto->getId();?>"><img src="img/btn-editar.png" width="20px" height="20px"/></a></li>
+                                                                    <li><a title="ver" href="projeto/excluir/<?php echo $projeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>
                                                                 <?php 
                                                                     }
                                                                 ?>
@@ -74,9 +73,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                </td>
-                                <td>
-                                </td>
+                                </td>                                
                             </tr>
 						</tfoot>
 					</table>
