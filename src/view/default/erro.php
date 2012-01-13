@@ -5,7 +5,7 @@
 	<title>SoftLuc Sistemas</title>
 	<style type="text/css">
 		body {
-			background-color: #8BA23C
+			background-color: #377dc4
 		}
 		div#aviso {
 			margin-top: 80px;
@@ -16,7 +16,7 @@
 		}
 		div#mensagem {
 			padding-top: 50px;
-			background-color: #8BA23C;
+			background-color: #377dc4;                        
 			color: #fff;
 			text-align: center;
 			font-family: sans-serif;
@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div id="aviso">
-		<img src="img/logo_idealizza.jpg" title="SoftLuc"/>
+		<img src="img/SoftLucLog.png" title="SoftLuc"/>
 	</div>
 	<div id="mensagem">
 		<?php 

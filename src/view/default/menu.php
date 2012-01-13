@@ -7,16 +7,41 @@
 		try{
 			$modulos = Modulo::listar();		
 			foreach($modulos as $modulo) {
-				$classname = $modulo->getLink() . "Controll";				
-				if(Acao::checarPermissao(1, $classname::MODULO)){
-				?>
-					<li>
-						<a tabindex="1" href="<?php echo $modulo->getLink() ?>">
-							<?php echo $modulo->getNome() ?>
-						</a>
-					</li>
-					<?php
-				}
+				$classname = $modulo->getLink() . "Controll";
+				
+				$teste = false;
+				
+				switch ($classname){
+						
+					case "perfilControll":
+						if(Acao::checarPermissao(1, PerfilControll::MODULO)){
+							$teste = true;
+							}
+						break;
+						
+					case "projetoControll":
+						if(Acao::checarPermissao(1, ProjetoControll::MODULO)){
+							$teste = true;
+							}
+						break;													
+
+					case "usuarioControll":
+						if(Acao::checarPermissao(1, UsuarioControll::MODULO)){
+							$teste = true;
+							}
+						break;						
+						}
+						if($teste == true){
+						
+						?>
+							<li>
+								<a tabindex="1" href="<?php echo $modulo->getLink() ?>">
+									<?php echo $modulo->getNome();?>
+								</a>
+							</li>
+						<?php
+						
+						}
 			}
 		
 		}catch(ListaVazia $e){}
