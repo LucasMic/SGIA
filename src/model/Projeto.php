@@ -45,9 +45,7 @@ class Projeto {
         $this->metodologia = $metodologia;
         $this->descricaoAreasPesquisa = $descricaoAreasPesquisa;
         $this->consideracoesGeraisRecomendacoes = $consideracoesGeraisRecomendacoes;
-        $this->usuario_id = $usuario->getId();
-        $this->usuario_perfil_id = $usuario->getPerfil()->getId();
-                
+        $this->usuario = $usuario;
     }
                         
     /*
@@ -95,18 +93,13 @@ class Projeto {
     public function setConsideracoesGeraisRecomendacoes($consideracoesGeraisRecomendacoes){
             $this->consideracoesGeraisRecomendacoes = $consideracoesGeraisRecomendacoes;
     }
-    public function getUsuario_id(){
-            return $this->usuario_id;
+    public function getUsuario(){
+            return $this->usuario;
     }
-    public function setUsuario_id($usuario_id){
-            $this->usuario_id = $usuario_id;
+    public function setUsuario($usuario){
+            $this->usuario = $usuario;
     }    
-    public function getUsuario_perfil_id(){
-            return $this->usuario_perfil_id;    
-    }
-    public function setUsuario_perfil_id($usuario_perfil_id){
-            $this->usuario_perfil_id = $usuario_perfil_id;
-    }
+    
     
     /*
     * Metodo _validarCampos()
@@ -181,7 +174,9 @@ class Projeto {
         // percorrendo os usuarios //
         foreach($projetos as $projeto){
                 // instanciando e jogando dentro da colecao $objetos o Usuario //
-                $objetos[] = new Projeto($projeto['id'],$projeto['nome'],$projeto['descricao'], $projeto['introducao'], $projeto['metodologia'], $projeto['descricao_areas_pesquisa'], $projeto['consideracoes_gerais_recomendacoes'], $projeto['usuario_id'], $projeto['usuario_perfil_id']);
+                $usuario = Usuario::buscar($projeto['usuario_id']);                
+            
+                $objetos[] = new Projeto($projeto['id'],$projeto['nome'],$projeto['descricao'], $projeto['introducao'], $projeto['metodologia'], $projeto['descricao_areas_pesquisa'], $projeto['consideracoes_gerais_recomendacoes'], $usuario);
         }
         // retornando a colecao $objetos //
         return $objetos;

@@ -47,8 +47,8 @@
             '".$obj->getMetodologia()."',
             '".$obj->getDescricaoAreasPesquisa()."',
             '".$obj->getConsideracoesGeraisRecomendacoes()."',
-            '".$obj->getUsuario_id()."',
-            '".$obj->getUsuario_perfil_id()."')";
+            '".$obj->getUsuario()->getId()."',
+            '".$obj->getUsuario()->getPerfil()->getId()."')";
             // EXECUTANDO A SQL //
             $resultado = $this->conexao->exec($sql);
 

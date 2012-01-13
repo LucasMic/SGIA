@@ -65,10 +65,13 @@
                 */
             private function _add($dados){
                     // instanciando o novo Usuário //
-                    $usuario = new Usuario(0,(!empty($dados['perfil'])) ? Perfil::buscar($dados['perfil']) : null,$dados['login'],$dados['senha']);
+                    $instancia = new Projeto(0,$dados['nome'],$dados['descricao'],
+                                            $dados['introducao'], $dados['metodologia'],
+                                            $dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
+                    
                     // persistindo em inserir o usuário //
                     try {
-                            $usuario->inserir();
+                            $instancia->inserir();
                             // setando a mensagem de sucesso //
                             $this->setFlash('Projeto cadastrado com sucesso.');
                             // setando a url //

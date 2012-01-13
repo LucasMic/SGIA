@@ -1,6 +1,6 @@
 <style type="text/css">
 
-.spanButao{
+.labelButao{
     color: #CC3300;
     cursor: pointer;
     /*display: block;*/
@@ -11,44 +11,95 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    //$(".esconde").hide();
-    
-    /*$("#labelDescricao").click(function(){        
+    $(".esconde").hide();
+    //isso é para descrição
+    $("#labelExibirDescricao").click(function(){        
         $("#divDescricao").slideToggle("slow");
-	return false; //Prevent the browser jump to the link anchor
-    });*/
+        $("#labelExibirDescricao").hide(); 
+        $("#labelEsconderDescricao").show();
+	return false;
+    });    
+    $("#labelEsconderDescricao").click(function(){        
+        $("#divDescricao").slideToggle("slow");
+        $("#labelExibirDescricao").show(); 
+        $("#labelEsconderDescricao").hide();
+	return false;
+    });
+    ///isso é para descrição//
+    
+    //isso é para Introducao
+    $("#labelExibirIntroducao").click(function(){        
+        $("#divIntroducao").slideToggle("slow");
+        $("#labelExibirIntroducao").hide(); 
+        $("#labelEsconderIntroducao").show();
+	return false;
+    });    
+    $("#labelEsconderIntroducao").click(function(){        
+        $("#divIntroducao").slideToggle("slow");
+        $("#labelExibirIntroducao").show(); 
+        $("#labelEsconderIntroducao").hide();
+	return false;
+    });
+    ///isso é para Introducao//
+    
+    //isso é para Metodologia
+    $("#labelExibirMetodologia").click(function(){        
+        $("#divMetodologia").slideToggle("slow");
+        $("#labelExibirMetodologia").hide(); 
+        $("#labelEsconderMetodologia").show();
+	return false;
+    });    
+    $("#labelEsconderMetodologia").click(function(){        
+        $("#divMetodologia").slideToggle("slow");
+        $("#labelExibirMetodologia").show(); 
+        $("#labelEsconderMetodologia").hide();
+	return false;
+    });
+    ///isso é para Metodologia//
+    
+    //isso é para DescricaoAreaPesquisa
+    $("#labelExibirDescricaoAreaPesquisa").click(function(){        
+        $("#divDescricaoAreaPesquisa").slideToggle("slow");
+        $("#labelExibirDescricaoAreaPesquisa").hide(); 
+        $("#labelEsconderDescricaoAreaPesquisa").show();
+	return false;
+    });    
+    $("#labelEsconderDescricaoAreaPesquisa").click(function(){        
+        $("#divDescricaoAreaPesquisa").slideToggle("slow");
+        $("#labelExibirDescricaoAreaPesquisa").show(); 
+        $("#labelEsconderDescricaoAreaPesquisa").hide();
+	return false;
+    });
+    ///isso é para DescricaoAreaPesquisa//
+    
+    //isso é para DescricaoAreaPesquisa
+    $("#labelExibirConsideracoesGeraisRecomendacoes").click(function(){        
+        $("#divConsideracoesGeraisRecomendacoes").slideToggle("slow");
+        $("#labelExibirConsideracoesGeraisRecomendacoes").hide(); 
+        $("#labelEsconderConsideracoesGeraisRecomendacoes").show();
+	return false;
+    });    
+    $("#labelEsconderConsideracoesGeraisRecomendacoes").click(function(){        
+        $("#divConsideracoesGeraisRecomendacoes").slideToggle("slow");
+        $("#labelExibirConsideracoesGeraisRecomendacoes").show(); 
+        $("#labelEsconderConsideracoesGeraisRecomendacoes").hide();
+	return false;
+    });
+    ///isso é para DescricaoAreaPesquisa//
+    
+    
 });
 </script>
 
 
-<script type="text/javascript">
-jQuery.fn.toggleText = function(a,b) {
-    return   this.html(this.html().replace(new RegExp("("+a+"|"+b+")"),function(x){return(x==a)?b:a;}));
-}
- 
-$(document).ready(function(){
-$('.tgl').before('<span id="spanButao"> Exibir</span>');
-$('.tgl').css('display', 'none')
-    $('#spanButao').click(function() {
-        alert("oi");
-        $(this).next().slideToggle('slow').siblings('.tgl:visible').slideToggle('fast');
-        // aqui começa o funcionamento do plugin
-        //$(this).toggleText('Exibir','Ocultar').siblings('span').next('.tgl:visible').prev().toggleText('Exibir','Ocultar');
-    });
-})
-</script>
 
-
-
-
-
-	<div class=" header-content">
-    	<h2 class="left">Cadastro de Projeto</h2>
-    	<?php
-                //AQUI SERVE PRA EXIBIR O SELECT DE ACORDO COM A SEDE NO CASO PROJETO
-    		//require_once VIEW . DS . "default" . DS . "sede.php";
-    	?>	
-	</div>
+<div class=" header-content">
+<h2 class="left">Cadastro de Projeto</h2>
+<?php
+        //AQUI SERVE PRA EXIBIR O SELECT DE ACORDO COM A SEDE NO CASO PROJETO
+        //require_once VIEW . DS . "default" . DS . "sede.php";
+?>	
+</div>
 <hr class="mrg-bottom_20"/>
     <div id="dlist-cadastroashboard-wrap">
             <div class="metabox"></div>
@@ -67,30 +118,84 @@ $('.tgl').css('display', 'none')
                                                                 </p>    
                                                                 <input type="text" id="nome" name="nome" value="" class="required" />
                                                             </li>
-                                                        </ul>                                                            
-
+                                                        </ul>
+                                                        
                                                         <ul class="list-cadastro">
-                                                            <li>
+                                                            <li style="margin-bottom: 16px;">
                                                                 <p>
-                                                                    <label for="descricao">Descrição do projeto</label>                                                                    
-                                                                </p> 
-                                                                <p class="tgl">
-                                                                    <textarea rows="2" cols="20" id="descricao" name="descricao" class="tinymce"></textarea> 
+                                                                    <label for="descricao">Descrição do projeto</label>
+                                                                </p>
+                                                                <p>
+                                                                    <label class="labelButao" id="labelExibirDescricao"> Exibir + </label>
+                                                                    <label class="labelButao esconde" id="labelEsconderDescricao"> Esconder - </label>
                                                                 </p>
                                                             </li>
-                                                        </ul>
-
-                                                        <!--<ul id="divDescricao" class="list-cadastro esconde">
-
-                                                            <p>
-                                                                <label for="descricao">Descrição do projeto</label>
-                                                                <label class="labelButao" id="labelDescricao"> Exibir </label>
-                                                            </p>  
-
-                                                            <li class="tgl">                                                                    
+                                                            
+                                                            <li style="margin-bottom: 16px;" id="divDescricao" class="esconde">
                                                                 <textarea rows="2" cols="20" id="descricao" name="descricao" class="tinymce"></textarea> 
                                                             </li>
-                                                        </ul>-->
+                                                        </ul>
+                                                        
+                                                        
+                                                        <ul class="list-cadastro">
+                                                            <li style="margin-bottom: 16px;">
+                                                                <p>
+                                                                    <label for="introducao">Introdução do projeto</label>
+                                                                </p>
+                                                                <p>
+                                                                    <label class="labelButao" id="labelExibirIntroducao"> Exibir + </label>
+                                                                    <label class="labelButao esconde" id="labelEsconderIntroducao"> Esconder - </label>
+                                                                </p>
+                                                            </li>
+                                                            <li style="margin-bottom: 16px;" id="divIntroducao" class="esconde">
+                                                                <textarea rows="2" cols="20" id="introducao" name="introducao" class="tinymce"></textarea> 
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                        <ul class="list-cadastro">
+                                                            <li style="margin-bottom: 16px;">
+                                                                <p>
+                                                                    <label for="introducao">Metodologia do projeto</label>
+                                                                </p>
+                                                                <p>
+                                                                    <label class="labelButao" id="labelExibirMetodologia"> Exibir + </label>
+                                                                    <label class="labelButao esconde" id="labelEsconderMetodologia"> Esconder - </label>
+                                                                </p>
+                                                            </li>
+                                                            <li style="margin-bottom: 16px;" id="divMetodologia" class="esconde">
+                                                                <textarea rows="2" cols="20" id="metodologia" name="metodologia" class="tinymce"></textarea> 
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                        <ul class="list-cadastro">
+                                                            <li style="margin-bottom: 16px;">
+                                                                <p>
+                                                                    <label for="DescricaoAreaPesquisa">Descrição da área da pesquisa</label>
+                                                                </p>
+                                                                <p>
+                                                                    <label class="labelButao" id="labelExibirDescricaoAreaPesquisa"> Exibir + </label>
+                                                                    <label class="labelButao esconde" id="labelEsconderDescricaoAreaPesquisa"> Esconder - </label>
+                                                                </p>
+                                                            </li>
+                                                            <li style="margin-bottom: 16px;" id="divDescricaoAreaPesquisa" class="esconde">
+                                                                <textarea rows="2" cols="20" id="descricaoAreaPesquisa" name="descricaoAreaPesquisa" class="tinymce"></textarea> 
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                        <ul class="list-cadastro">
+                                                            <li style="margin-bottom: 16px;">
+                                                                <p>
+                                                                    <label for="ConsideracoesGeraisRecomendacoes">Considerações gerais / recomendações</label>
+                                                                </p>
+                                                                <p>
+                                                                    <label class="labelButao" id="labelExibirConsideracoesGeraisRecomendacoes"> Exibir + </label>
+                                                                    <label class="labelButao esconde" id="labelEsconderConsideracoesGeraisRecomendacoes"> Esconder - </label>
+                                                                </p>
+                                                            </li>
+                                                            <li style="margin-bottom: 16px;" id="divConsideracoesGeraisRecomendacoes" class="esconde">
+                                                                <textarea rows="2" cols="20" id="consideracoesGeraisRecomendacoes" name="consideracoesGeraisRecomendacoes" class="tinymce"></textarea> 
+                                                            </li>
+                                                        </ul>
 
                                                     </fieldset>	
 

@@ -45,8 +45,8 @@
 						?>
 							<tr <?php echo $class; ?> >
                                                             <td width="20%" align="left"><?php echo $projeto->getNome();?></td>
-                                                            <td width="40%" align="left"><?php echo $projeto->getDescricao(); ?></td>
-                                                            <td width="20%" align="left"><?php $usuario = Usuario::buscar($projeto->getUsuario_id()); echo $usuario->getLogin();?></td>
+                                                            <td width="40%" align="left"><?php echo $projeto->getDescricao();?></td>
+                                                            <td width="20%" align="left"><?php echo $projeto->getUsuario()->getLogin();?></td>
                                                             <td width="20%">
                                                                 <ul class="action">						
                                                                     <li><a href="projeto/ver/<?php echo $projeto->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
@@ -70,6 +70,8 @@
                                 	<ul class="paginacao">
                                         <li class="btn-paginacao ativo"><?php echo $paginacao->getLinks();?></li>
                                     </ul>
+                                </td>
+                                <td>
                                 </td>
                                 <td>
                                 </td>
