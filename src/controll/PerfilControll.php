@@ -139,7 +139,7 @@
 				}
 			}
 			// instanciando o perfil antigo, com os novos dados //
-			$perfil = new Perfil($dados['id'],$dados['nome'],(isset($acoes)) ? $acoes : null, Sede::buscar($_SESSION["sede"]));
+			$perfil = new Perfil($dados['id'],$dados['nome'],(isset($acoes)) ? $acoes : null);
 			// persistindo em editar o objeto //
 			try {
 				$perfil->editar();			
