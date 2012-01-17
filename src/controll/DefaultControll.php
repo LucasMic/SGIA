@@ -37,7 +37,7 @@
 			try {
 				$usuario = Usuario::logar($dados['login'],$dados['senha']);
 
-				//$_SESSION["sede"] = $usuario->getSedes()->getId();
+				$_SESSION["idProjeto"] = 0;
 
 				//guardando o usuário no controlador
 				$this->setUsuario($usuario);
@@ -75,5 +75,10 @@
 
 		public function voltar(){
 			$this->setPage();
+		}
+                
+                public function setarProjeto($idProjeto){                   
+			$_SESSION["idProjeto"] = $idProjeto;                        
+                        $this->index();
 		}
 	} ?>

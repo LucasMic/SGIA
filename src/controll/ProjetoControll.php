@@ -65,9 +65,7 @@
                 */
             private function _add($dados){
                     // instanciando o novo Usuário //
-                    $instancia = new Projeto(0,$dados['nome'],$dados['descricao'],
-                                            $dados['introducao'], $dados['metodologia'],
-                                            $dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
+                    $instancia = new Projeto(0,$dados['nome'],$dados['descricao'],$dados['introducao'], $dados['metodologia'],$dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
                     
                     // persistindo em inserir o usuário //
                     try {
@@ -114,17 +112,15 @@
                 * @return Usuario
                 */
             private function _editar($dados){
-                    $projeto = new Projeto($dados['id'],                        
-                    $dados['nome'],
-                    $dados['descricao']);
+                    $instancia = new Projeto($dados['id'],$dados['nome'],$dados['descricao'],$dados['introducao'], $dados['metodologia'],$dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
                     try {
-                            $projeto->editar();
+                            $instancia->editar();
                             $this->setFlash('Projeto editado com sucesso');
                             $this->setPage();
                     }
                     catch(CamposObrigatorios $e){
                             $this->setFlash($e->getMessage());
-                            $this->setDados($projeto,'VIEW');
+                            $this->setDados($instancia,'VIEW');
                             $this->setTela('editar',array('projeto'));
                     }
             }

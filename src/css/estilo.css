@@ -49,7 +49,11 @@ a:hover{
 .logado a:visited{ color:#bddceb}
 .logado a:hover{ color:#bddceb}
 
-
+.projeto{
+    margin-left: 790px;    
+    margin-top: 8px;
+    color:#FFF;
+}
 
 /* ------------------------------------------------------------------------------------------------------------ */
 /* NAV */

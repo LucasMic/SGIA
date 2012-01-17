@@ -52,7 +52,7 @@
                                                                     if(Acao::checarPermissao(2,ProjetoControll::MODULO)){
                                                                 ?>
                                                                     <li><a title="editar" href="projeto/editar/<?php echo $projeto->getId();?>"><img src="img/btn-editar.png" width="20px" height="20px"/></a></li>
-                                                                    <li><a title="ver" href="projeto/excluir/<?php echo $projeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>
+                                                                    <li><a title="excluir" href="projeto/excluir/<?php echo $projeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>
                                                                 <?php 
                                                                     }
                                                                 ?>

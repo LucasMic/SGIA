@@ -60,8 +60,20 @@
                 content_css : "<?php echo BASE; ?>/css/content.css"
             });
 	});
-</script>
+        </script>
         <!-- /TinyMCE -->
+        
+        <!-- Select Projeto -->
+        <script type="text/javascript">
+            $(document).ready(function(){                
+                $("#projetoAtual").change(function(){                            
+                    $("#formProjetoAtual").attr("action", "<?php echo BASE; ?>/default/setarProjeto/"+$("#projetoAtual").val());                    
+                    $("#formProjetoAtual").submit();
+                    return false;
+                });
+            });
+        </script>
+        <!-- Select Projeto -->
         
 </head>
 
@@ -75,21 +87,58 @@
 	        	<div class="header">
 	            	<h1 class="left">SGIA</h1>
 	            	<?php
-						if($this->getUsuario()){
-						?>
-	                		<p class="left logado">
-	                			<strong>Olá, 
-	                					<?php echo $this->getUsuario()->getLogin(); ?>
-            					</strong>
-            					&nbsp; | &nbsp;
-            					<a title="trocar senha" href="usuario/trocarSenha">
-            						trocar senha
-        						</a>
-        						&nbsp; | &nbsp;
-        						<a title="sair" href="logout">sair</a>
-    						</p>
-					<?php }?>
-	            </div>
+                            if($this->getUsuario()){
+			?>
+                            <p class="left logado">
+                                <strong>Olá, 
+	                	<?php echo $this->getUsuario()->getLogin(); ?>
+            			</strong>
+            			&nbsp; | &nbsp;
+            			<a title="trocar senha" href="usuario/trocarSenha">
+            			trocar senha
+        			</a>
+        			&nbsp; | &nbsp;
+        			<a title="sair" href="logout">sair</a>
+                            </p>			
+                            
+                            <div class="projeto">                                
+                            <form method="post" id="formProjetoAtual" >
+                            <?php 
+                                try{
+                                    $projetos = Projeto::listar();
+                                    ?>
+                                    <strong>Projeto &nbsp; &nbsp;</strong>
+                                    
+                                    <select name="projetoAtual" id="projetoAtual" >
+                                    <option value="0">Selecione um Projeto</option>
+                                    <?php					
+                                    foreach($projetos as $projeto){
+                                        ?>
+                                    
+                                    
+                                    <option value="<?php 
+                                            echo $projeto->getId().'"'; 										
+                                            if($projeto->getId() == $_SESSION["idProjeto"]){
+                                                    echo 'selected';
+                                            }										
+                                    ?>
+                                    "><?php echo $projeto->getNome(); ?></option>
+                                    
+                                    <?php
+                                    }
+                                    ?>
+                                    </select>
+                                    <?php
+                                    }catch(ListaVazia $e){
+                                        echo "<select disabled='disabled'><option selected='selected' value='0'>Não existe projeto cadastrados</option></select>";
+                                }
+                                
+                            ?>
+                            </form>
+                            </div>
+                            
+                        <?php }?>    
+                        </div>
         	</header>
 			
 			<!--fim div head-->

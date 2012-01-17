@@ -36,6 +36,11 @@
         * @return Proejto
         */
         public function inserir($obj){
+            //isso foi por conta da hospedagem
+            $usuario = $obj->getUsuario();
+            $perfil = $usuario->getPerfil();
+            //isso foi por conta da hospedagem
+            
             // INSTRUCAO SQL //
             $sql = "INSERT INTO " . self::TABELA . "
             (nome, descricao, introducao, metodologia, 
@@ -47,8 +52,8 @@
             '".$obj->getMetodologia()."',
             '".$obj->getDescricaoAreasPesquisa()."',
             '".$obj->getConsideracoesGeraisRecomendacoes()."',
-            '".$obj->getUsuario()->getId()."',
-            '".$obj->getUsuario()->getPerfil()->getId()."')";
+            '".$usuario->getId()."',
+            '".$perfil->getId()."')";
             // EXECUTANDO A SQL //
             $resultado = $this->conexao->exec($sql);
 
@@ -69,6 +74,10 @@
         */
         public function editar($obj){
             // INSTRUCAO SQL //
+            //isso foi por conta da hospedagem
+            $usuario = $obj->getUsuario();
+            $perfil = $usuario->getPerfil();
+            //isso foi por conta da hospedagem            
             $sql = "UPDATE " . self::TABELA . " SET 
             nome = '".$obj->getNome()."',
             descricao =	'".$obj->getDescricao()."',
@@ -76,8 +85,8 @@
             metodologia = '".$obj->getMetodologia()."',
             descricao_areas_pesquisa = '".$obj->getDescricaoAreasPesquisa()."',
             consideracoes_gerais_recomendacoes = '".$obj->getConsideracoesGeraisRecomendacoes()."',    
-            usuario_id = '".$obj->getUsuario_id()."',
-            usuario_perfil_id = '".$obj->getUsuario_perfil_id()."'                    
+            usuario_id = '".$usuario->getId()."',
+            usuario_perfil_id = '".$perfil->getId()."'                    
             WHERE id = '".$obj->getId()."'";
             // EXECUTANDO A SQL //
             $resultado = $this->conexao->exec($sql);

@@ -35,7 +35,7 @@
 						
 						?>
 							<li>
-								<a tabindex="1" href="<?php echo $modulo->getLink() ?>">
+								<a tabindex="1" href="<?php echo BASE; ?>/<?php echo $modulo->getLink() ?>">
 									<?php echo $modulo->getNome();?>
 								</a>
 							</li>
@@ -47,7 +47,7 @@
 		}catch(ListaVazia $e){}
 		?>
 	<li>
-		<a tabindex="1" href="logout">Sair</a>
+		<a tabindex="1" href="<?php echo BASE; ?>/logout">Sair</a>
 	</li>
 </nav>
 </ul>
