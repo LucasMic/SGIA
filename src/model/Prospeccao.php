@@ -104,6 +104,10 @@ class Prospeccao {
     public function setUsuario($usuario){
             $this->usuario = $usuario;
     }    
+        
+                                                
+                                                
+        
     
     
     /*
@@ -111,11 +115,9 @@ class Prospeccao {
     * @return boolean
     */
     private function _validarCampos(){
-            if(($this->getElevacao() == "")
-                    ||($this->getCoordenada_UTM_N() == "")
-                    ||($this->getCoordenada_UTM_E() == "")
-                    ||($this->getPontoDe() == ""))
-                    //return false;
+        if(($this->getElevacao() == "")||($this->getCoordenada_UTM_N() == "")||($this->getCoordenada_UTM_E() == "")||($this->getPontoDe() == 0))
+            return false;
+        else
             return true;
     }
     
@@ -124,9 +126,11 @@ class Prospeccao {
     */
     public function inserir(){
         // validando os campos //
-        if(!$this->_validarCampos())
+        if(!$this->_validarCampos()){            
             // levantando a excessao CamposObrigatorios //
             throw new CamposObrigatorios();
+        }
+            
         // recuperando a instancia da classe de acesso a dados //
         $instancia = ProspeccaoDAO::getInstancia();
         // executando o metodo //
@@ -140,9 +144,10 @@ class Prospeccao {
     */
     public function editar(){
         // validando os campos //
-        if(!$this->_validarCampos())
+        if(!$this->_validarCampos()){
                 // levantando a excessao 0,CamposObrigatorios //
                 throw new CamposObrigatorios();
+        }
         // recuperando a instancia da classe de acesso a dados //
         $instancia = ProspeccaoDAO::getInstancia();
         // executando o metodo //
@@ -196,7 +201,7 @@ class Prospeccao {
     */
     public static function buscar($id){
         // recuperando a instancia da classe de acesso a dados //
-        $instancia = ProjetoDAO::getInstancia();
+        $instancia = ProspeccaoDAO::getInstancia();
         // executando o metodo //
         $objeto = $instancia->buscar($id);
         // checando se o resultado foi falso //
@@ -207,7 +212,7 @@ class Prospeccao {
         $usuario = Usuario::buscar($objeto['usuario_id']);  
         $projeto = Projeto::buscar($objeto['projeto_id']);
         // instanciando e retornando o Usuario //
-        return Prospeccao($objeto['id'],$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
+        return new Prospeccao($objeto['id'],$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
     }
     
 }

@@ -67,7 +67,7 @@
                     $usuario = $this->getUsuario();
                     $projeto = Projeto::buscar($_SESSION["idProjeto"]);                           
                 
-                    $instancia = new Prospeccao(0,$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
+                    $instancia = new Prospeccao(0,$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['pontoDe'], $objeto['obs'], $projeto, $usuario);
                 
                     // persistindo em inserir o usuário //
                     try {
@@ -94,11 +94,11 @@
                     // código da ação //
                     static $acao = 2;
                     // Buscando o usuário //
-                    $projeto = Projeto::buscar($id);
+                    $instancia = Prospeccao::buscar($id);
                     // checando se o formulário nao foi passado //
                     if(!$this->getDados('POST')){
                             // Jogando perfil no atributo $dados do controlador //
-                            $this->setDados($projeto,'VIEW');
+                            $this->setDados($instancia,'VIEW');
                             // Definindo a tela //
                             $this->setTela('editar',array($this->ENTIDADE));
                     }
@@ -113,11 +113,11 @@
                 * @param $dados
                 * @return Usuario
                 */
-            private function _editar($objeto){                
+            private function _editar($objeto){
                     $usuario = $this->getUsuario();
                     $projeto = Projeto::buscar($_SESSION["idProjeto"]);
                     
-                    $instancia = new Prospeccao($objeto['id'],$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
+                    $instancia = new Prospeccao($objeto['id'],$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['pontoDe'], $objeto['obs'], $projeto, $usuario);
                 
                     try {
                             $instancia->editar();

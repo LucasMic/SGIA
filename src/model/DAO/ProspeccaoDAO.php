@@ -90,35 +90,14 @@
         */
         public function editar($obj){
             
-            $sql = "INSERT INTO " . self::TABELA . "
-            (elevacao, 
-            coordenada_UTM_N, 
-            coordenada_UTM_E, 
-            ponto_de, 
-            observacao, 
-            usuario_id, 
-            usuario_perfil_id,
-            projeto_id,
-            projeto_usuario_id,
-            projeto_usuario_perfil_id) 
-            VALUES('".$obj->getElevacao()."',
-            '".$obj->getCoordenada_UTM_N()."',
-            '".$obj->getCoordenada_UTM_E()."',
-            '".$obj->getPontoDe()."',
-            '".$obj->getObs()."',
-                
-            '".$usuario->getId()."',
-            '".$perfilUsuario->getId()."',
-                
-            '".$projeto->getId()."',
-            '".$usuarioProjeto->getId()."',    
-            '".$perfilUsuarioProjeto->getId()."')";            
+            $projeto = $obj->getProjeto();
+            $usuarioProjeto = $projeto->getUsuario();
+            $perfilUsuarioProjeto = $usuarioProjeto->getPerfil();            
             
-            // INSTRUCAO SQL //
-            //isso foi por conta da hospedagem
             $usuario = $obj->getUsuario();
-            $perfil = $usuario->getPerfil();
-            //isso foi por conta da hospedagem            
+            $perfilUsuario = $usuario->getPerfil();
+            
+                       
             $sql = "UPDATE " . self::TABELA . " SET 
             elevacao = '".$obj->getElevacao()."',
             coordenada_UTM_N = '".$obj->getCoordenada_UTM_N()."',
@@ -176,10 +155,9 @@
             // INSTRUCAO SQL //
             $txtWhere = "";
             if($idProjeto != 0){
-                $txtWhere = " where id_projeto = ".$idProjeto." ";
-            }
-            
-            $sql = "SELECT u.* FROM " . self::TABELA . " ".$txtWhere." u ORDER BY u.elevacao";            
+                $txtWhere = " where projeto_id = ".$idProjeto." ";
+            }            
+            $sql = "SELECT u.* FROM " . self::TABELA . " u ".$txtWhere." ORDER BY u.elevacao";                
             // EXECUTANDO A SQL //
             $resultado = $this->conexao->fetchAll($sql);
             // RETORNANDO O RESULTADO //

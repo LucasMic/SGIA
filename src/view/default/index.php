@@ -107,7 +107,7 @@
                                 try{
                                     $projetos = Projeto::listar();
                                     ?>
-                                    <strong>Projeto &nbsp; &nbsp;</strong>
+                                    <strong>Projetos &nbsp; &nbsp;</strong>
                                     
                                     <select name="projetoAtual" id="projetoAtual" >
                                     <option value="0">Selecione um Projeto</option>
@@ -130,7 +130,7 @@
                                     </select>
                                     <?php
                                     }catch(ListaVazia $e){
-                                        echo "<select disabled='disabled'><option selected='selected' value='0'>Não existe projeto cadastrados</option></select>";
+                                        echo "<strong>Projetos &nbsp; &nbsp;</strong> <select disabled='disabled'><option selected='selected' value='0'>Não existe projeto cadastrados</option></select>";
                                 }
                                 
                             ?>

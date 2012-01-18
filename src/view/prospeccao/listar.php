@@ -6,9 +6,15 @@
                 ?>	
 	</div>
 	<hr class="mrg-bottom_20"/>
-	 <div class="mrg-bottom_20">
-    	<a title="Cadastrar" class="btn_1" href="prospeccao/add">cadastrar prospecção</a>
-    </div>
+        <?php 
+            if($_SESSION["idProjeto"] != 0){
+        ?>
+            <div class="mrg-bottom_20">            
+                <a title="Cadastrar" class="btn_1" href="prospeccao/add">cadastrar prospecção</a>
+            </div>
+        <?php 
+            }else{echo "É necessário ter um projeto selecionado para poder cadastrar uma prospecção. <br />";}
+        ?>
 	<div id="dashboard-wrap">
 		<div class="metabox"></div>
 		<div class="clear"> </div>
@@ -19,16 +25,16 @@
 					 * Persistindo em listar os usuários
 					 */	
 					try {
-						$objetos = Prospeccao::listar($_SESSION["idProjeto"]);
+						$objetos = Prospeccao::listar($_SESSION["idProjeto"]);                                                
 						$paginacao = new Paginacao($objetos,20);
 				?>
 				<div class="radius">
 					<table id="lista" border="0" cellpadding="0" cellspacing="0" width="745">
 						<thead>
 							<tr class="tr-header">
-								<th>Nome do projeto</th>								
-                                                                <th>É ponto de</th>
-								<th>Ações</th>
+                                                            <th>É ponto de</th>	
+                                                            <th>Nome do projeto</th>								
+                                                            <th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -42,22 +48,23 @@
 								}
 								$count++;
 						?>
-							<tr <?php echo $class; ?> >
-                                                            <td width="60%" align="left"><?php echo $objeto->getProjeto()->getNome();?></td>                                                            
+							<tr <?php echo $class; ?> >                                                            
                                                             <td width="20%" align="left"><?php 
                                                                                             if($objeto->getPontoDe() == 1)
                                                                                                 echo "Caminhamento";
                                                                                             else
                                                                                                 echo "Sondagem";
                                                                                             ?></td>
-                                                            <td width="20%">
+                                                            <td width="50%" align="left"><?php echo $objeto->getProjeto()->getNome();?></td>
+                                                            <td width="30%">
                                                                 <ul class="action">						
                                                                     <li ><a title="ver" href="prospeccao/ver/<?php echo $objeto->getId();?>"><img src="img/btn-visualizar.png" /></a></li> 
                                                                 <?php
                                                                     if(Acao::checarPermissao(2,ProjetoControll::MODULO)){
-                                                                ?>
+                                                                ?>                                                                    
+                                                                    <li><a title="adicionar foto" href="<?php echo $objeto->getId();?>"><img src="img/btn-imagem.png" width="20px" height="20px"/></a></li>
                                                                     <li><a title="editar" href="prospeccao/editar/<?php echo $objeto->getId();?>"><img src="img/btn-editar.png" width="20px" height="20px"/></a></li>
-                                                                    <li><a title="excluir" href="prospeccao/excluir/<?php echo $objeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>
+                                                                    <li><a title="excluir" href="prospeccao/excluir/<?php echo $objeto->getId();?>"><img src="img/btn-excluir.png" /></a></li>                                                                    
                                                                 <?php 
                                                                     }
                                                                 ?>

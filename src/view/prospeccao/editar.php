@@ -1,3 +1,6 @@
+<?php 
+$prospeccao = $this->getDados('VIEW');
+?>
 <style type="text/css">
 .labelButao{
     color: #CC3300;
@@ -76,7 +79,11 @@ $(document).ready(function(){
 
 
 <div class=" header-content">
-<h2 class="left">Cadastro de Prospecção</h2>
+<h2 class="left">Editar Prospecção</h2>
+<?php
+        //AQUI SERVE PRA EXIBIR O SELECT DE ACORDO COM A SEDE NO CASO PROJETO
+        //require_once VIEW . DS . "default" . DS . "sede.php";
+?>	
 </div>
 <hr class="mrg-bottom_20"/>
     <div id="dlist-cadastroashboard-wrap">
@@ -87,6 +94,7 @@ $(document).ready(function(){
                             <div class="table">
                                     <div class="inside">
                                             <form method="post" id="form">
+                                                <input type="hidden" id="id" name="id" value="<?php echo $prospeccao->getId();?>" />
                                                     <fieldset>
                                                         <legend>Dados</legend>
                                                         <ul class="list-cadastro">
@@ -94,7 +102,7 @@ $(document).ready(function(){
                                                                 <p>
                                                                     <label for="elevacao">Elevação*</label>
                                                                 </p>    
-                                                                <input type="text" id="elevacao" name="elevacao" value="" class="required" />
+                                                                <input type="text" id="elevacao" name="elevacao" value="<?php echo $prospeccao->getElevacao();?>" class="required" />
                                                             </li>
                                                         </ul>
                                                         
@@ -103,16 +111,16 @@ $(document).ready(function(){
                                                                 <p>
                                                                     <label for="coordenada_UTM_N">Latitude*</label>
                                                                 </p>    
-                                                                <input type="text" id="coordenada_UTM_N" name="coordenada_UTM_N" value="" class="required" />
+                                                                <input type="text" id="coordenada_UTM_N" name="coordenada_UTM_N" value="<?php echo $prospeccao->getCoordenada_UTM_N();?>" class="required" />
                                                             </li>
                                                         </ul>
-                                                        
+
                                                         <ul class="list-cadastro">
                                                             <li>
                                                                 <p>
                                                                     <label for="coordenada_UTM_E">Longitude*</label>
                                                                 </p>    
-                                                                <input type="text" id="coordenada_UTM_E" name="coordenada_UTM_E" value="" class="required" />
+                                                                <input type="text" id="coordenada_UTM_E" name="coordenada_UTM_E" value="<?php echo $prospeccao->getCoordenada_UTM_E();?>" class="required" />
                                                             </li>
                                                         </ul>
                                                         
@@ -121,8 +129,8 @@ $(document).ready(function(){
                                                                 <p>
                                                                     <label for="pontoDe">Ponto de*</label>
                                                                 </p> <br />                                                                
-                                                                    <input type="radio" id="pontoDe" name="pontoDe" value="1"/> Caminhamento <br />
-                                                                    <input type="radio" id="pontoDe" name="pontoDe" value="2"/> Sondagem <br />                                                                
+                                                                    <input <?php if($prospeccao->getPontoDe()==1) echo "checked = 'checked'"  ;?> type="radio" id="pontoDe" name="pontoDe" value="1"/> Caminhamento <br />
+                                                                    <input <?php if($prospeccao->getPontoDe()==2) echo "checked = 'checked'"  ;?>type="radio" id="pontoDe" name="pontoDe" value="2"/> Sondagem <br />                                                                
                                                             </li>
                                                             <br />
                                                         </ul>
@@ -132,7 +140,7 @@ $(document).ready(function(){
                                                                 <p>
                                                                     <label for="obs">Observação</label>
                                                                 </p>    
-                                                                <textarea rows="2" cols="90" id="obs" name="obs"></textarea> 
+                                                                <textarea rows="2" cols="90" id="obs" name="obs"><?php echo $prospeccao->getObs();?></textarea> 
                                                             </li>
                                                         </ul>
 
@@ -141,7 +149,7 @@ $(document).ready(function(){
 
                                                     <ul id="bts">
                                                         <li>
-                                                            <input type="button" id="cadastrar" class="button right" value=" Cadastrar " />
+                                                            <input type="button" id="cadastrar" class="button right" value=" Editar " />
                                                             <input type="button" style="margin-right:5px;" class="button right" value="Voltar" onclick="location.href='voltar'" />
                                                         </li>
                                                     </ul>
@@ -152,4 +160,3 @@ $(document).ready(function(){
                     </div><!--fim div box-->
             </div><!--fim div box-content-->
     </div><!--fim div dashboard-wrap-->
-	
