@@ -33,6 +33,7 @@
         const TIPOPAGAMENTOS = 21;
         
         const PROJETOS = 22;
+        const PROSPECCAO = 23;
 		
 		public function __construct($tipo){
 			switch($tipo){
@@ -100,8 +101,11 @@
 					$msg = 'Nenhuma tipo de pagamento localizado.';
 					break;
 				case self::PROJETOS:
-					$msg = 'Nenhuma projeto localizado.';
+					$msg = 'Nenhum projeto localizado.';
 					break;	
+				case self::PROSPECCAO:
+					$msg = 'Nenhuma prospecção localizada.';
+					break;	                                    
 			}
 			parent::__construct($msg);
 		}

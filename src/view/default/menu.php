@@ -6,9 +6,16 @@
 	<?php
 		try{
 			$modulos = Modulo::listar();		
+                        
+                        /*echo"<pre>";
+                        var_dump($modulos);
+                        die();*/
+                        
 			foreach($modulos as $modulo) {
 				$classname = $modulo->getLink() . "Controll";
 				
+                                
+                                
 				$teste = false;
 				
 				switch ($classname){
@@ -25,6 +32,12 @@
 							}
 						break;													
 
+                                        case "ProspeccaoControll":                                                
+						if(Acao::checarPermissao(1, ProspeccaoControll::MODULO)){
+							$teste = true;
+							}
+						break;
+                                                
 					case "usuarioControll":
 						if(Acao::checarPermissao(1, UsuarioControll::MODULO)){
 							$teste = true;

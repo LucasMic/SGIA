@@ -15,6 +15,8 @@
                 const CURSOVALOR =12;
                 const PAGAMENTOSFORMA = 13;
 		const PROJETOS = 14;
+                const PROSPECCAO = 15;
+                
 		public function __construct($tipo){
 			switch($tipo){
 				case self::ACAO:
@@ -58,6 +60,9 @@
                                     break;
                                 case self::PROJETOS:
                                     $msg = 'Projeto não encontrado';
+                                    break;
+                                case self::PROSPECCAO:
+                                    $msg = 'Prospecção não encontrada';
                                     break;
 			}
 			parent::__construct($msg);

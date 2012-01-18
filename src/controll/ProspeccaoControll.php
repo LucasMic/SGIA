@@ -1,17 +1,17 @@
 <?php
 /**
- * Classe UsuarioControll
- * Controlador do modulo de usuários
+ * Classe ProspeccaoControll
+ * Controlador do modulo de prospeccao
  * @package controll
  * @author LucasMichel
  */
-	class ProjetoControll extends Controll {
+	class ProspeccaoControll extends Controll {
 		
             /**
                 * Constante referente ao número do modulo
                 */
-            const MODULO = 3;
-            private $ENTIDADE = 'projeto';
+            const MODULO = 4;
+            private $ENTIDADE = 'prospeccao';
 
             /**
                 * Acao index()
@@ -29,14 +29,13 @@
                 * Acao ver($id)
                 * @param $id
                 */
-            public	
-                function ver($id){
+            public function ver($id){
                     // código da ação //
                     static $acao = 1;
                     // buscando o usuário //
-                    $projeto = Projeto::buscar($id);
+                    $instancia = Prospeccao::buscar($id);
                     // jogando o usuário no atributo $dados do controlador //
-                    $this->setDados($projeto,'VIEW');
+                    $this->setDados($instancia,'VIEW');
                     // definindo a tela //
                     $this->setTela('ver',array($this->ENTIDADE));
             }
@@ -64,15 +63,17 @@
                 * @param $dados
                 * @return Usuario
                 */
-            private function _add($dados){
-                    // instanciando o novo Usuário //
-                    $instancia = new Projeto(0,$dados['nome'],$dados['descricao'],$dados['introducao'], $dados['metodologia'],$dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
-                    
+            private function _add($objeto){
+                    $usuario = $this->getUsuario();
+                    $projeto = Projeto::buscar($_SESSION["idProjeto"]);                           
+                
+                    $instancia = new Prospeccao(0,$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
+                
                     // persistindo em inserir o usuário //
                     try {
                             $instancia->inserir();
                             // setando a mensagem de sucesso //
-                            $this->setFlash('Projeto cadastrado com sucesso.');
+                            $this->setFlash('Prospecção cadastrada com sucesso.');
                             // setando a url //
                             $this->setPage();
                     }
@@ -112,11 +113,15 @@
                 * @param $dados
                 * @return Usuario
                 */
-            private function _editar($dados){
-                    $instancia = new Projeto($dados['id'],$dados['nome'],$dados['descricao'],$dados['introducao'], $dados['metodologia'],$dados['descricaoAreaPesquisa'], $dados['consideracoesGeraisRecomendacoes'], $this->getUsuario());
+            private function _editar($objeto){                
+                    $usuario = $this->getUsuario();
+                    $projeto = Projeto::buscar($_SESSION["idProjeto"]);
+                    
+                    $instancia = new Prospeccao($objeto['id'],$objeto['elevacao'], $objeto['coordenada_UTM_N'], $objeto['coordenada_UTM_E'], $objeto['ponto_de'], $objeto['observacao'], $projeto, $usuario);
+                
                     try {
                             $instancia->editar();
-                            $this->setFlash('Projeto editado com sucesso');
+                            $this->setFlash('Prospecção editada com sucesso');
                             $this->setPage();
                     }
                     catch(CamposObrigatorios $e){
@@ -125,13 +130,6 @@
                             $this->setTela('editar',array($this->ENTIDADE));
                     }
             }
-
-            /*public function mudarSede(){
-
-                    $_SESSION["sede"] = $_POST["ns"];
-                    $this->setPage();
-            }*/		
-
             /**
                 * Acao excluir($id)
                 * @param $id
@@ -144,9 +142,9 @@
                     // checando se o usuário a ser excluído é diferente do logado //
                     if($projeto->getId() != parent::getUsuario()->getId()){
                             // excluíndo ele //
-                            $projeto->excluir();
+                            $usuario->excluir();
                             // setando mensagem de sucesso //
-                            $this->setFlash('Projeto excluído com sucesso.');
+                            $this->setFlash('Usuário excluído com sucesso.');
                     }
                     else
                             $this->setFlash('Você não pode se auto-excluir.');
